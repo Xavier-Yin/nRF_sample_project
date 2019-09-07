@@ -5,6 +5,7 @@ build:
   stage: build
   script:
     - echo "CI_BUILDS_DIR = $CI_BUILDS_DIR"
+    - echo "CI_COMMIT_REF_NAME = $CI_COMMIT_REF_NAME"
     - echo "CI_COMMIT_SHORT_SHA = $CI_COMMIT_SHORT_SHA"
     - echo "CI_COMMIT_MESSAGE = $CI_COMMIT_MESSAGE"
     - echo "CI_JOB_NAME = $CI_JOB_NAME"
@@ -19,6 +20,11 @@ build:
     - git log
     - git log -1 --date=unix | grep "Date:" | rev | cut -d ' ' -f 1 | rev
     - git describe --always --abbrev=6 --dirty=-dirty
+  artifacts:
+    name: "CI_COMMIT_SHORT_SHA"
+    paths:
+      - $CI_PROJECT_DIR/dfu_template/Output/Release/Exe/*.hex
+    when: on_success
 #  services:
 #    - bug313/nrf_embuild
 #  tags:
