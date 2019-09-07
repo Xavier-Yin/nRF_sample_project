@@ -21,8 +21,8 @@ build:
     - git describe --always --abbrev=6 --dirty=-dirty
 #  services:
 #    - bug313/nrf_embuild
-  tags:
-    - nrf_embuild
+#  tags:
+#    - nrf_embuild
 #  variables:
 #    DOCKER_TLS_CERTDIR: ""
   only:
