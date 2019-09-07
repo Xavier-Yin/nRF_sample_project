@@ -864,7 +864,7 @@ int main(void)
     services_init();
     conn_params_init();
 
-    NRF_LOG_INFO("Buttonless DFU Application started.");
+    NRF_LOG_INFO("Buttonless DFU Application started. (modifieds)");
 
     // Start execution.
     application_timers_start();
