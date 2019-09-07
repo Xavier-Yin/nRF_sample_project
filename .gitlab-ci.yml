@@ -17,7 +17,6 @@ build:
     - emBuild -verbose -config 'Release' $CI_PROJECT_DIR/dfu_template/ble_app_buttonless_dfu_pca10040_s132.emProject
     - cd $CI_PROJECT_DIR
     - git status
-    - git log
     - git log -1 --date=unix | grep "Date:" | rev | cut -d ' ' -f 1 | rev
     - git describe --always --abbrev=6 --dirty=-dirty
   artifacts:
@@ -25,6 +24,9 @@ build:
     paths:
       - $CI_PROJECT_DIR/dfu_template/Output/Release/Exe/*.hex
     when: on_success
+  cache:
+    paths:
+      - $CI_PROJECT_DIR/dfu_template/Output
 #  services:
 #    - bug313/nrf_embuild
 #  tags:
