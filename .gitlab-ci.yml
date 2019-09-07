@@ -1,0 +1,31 @@
+#image: docker:latest
+image: bug313/nrf_embuild
+
+build:
+  stage: build
+  script:
+    - echo "CI_BUILDS_DIR = $CI_BUILDS_DIR"
+    - echo "CI_COMMIT_DESCRIPTION = $CI_COMMIT_DESCRIPTION"
+    - echo "CI_COMMIT_SHORT_SHA = $CI_COMMIT_SHORT_SHA"
+    - echo "CI_COMMIT_MESSAGE = $CI_COMMIT_MESSAGE"
+    - echo "CI_JOB_NAME = $CI_JOB_NAME"
+    - echo "CI_JOB_STAGE = $CI_JOB_STAGE"
+    - echo "CI_PROJECT_DIR = $CI_PROJECT_DIR"
+    - which git
+    - embuild
+    - embuild -verbose -config 'Release' $CI_PROJECT_DIR/dfu_template/ble_app_buttonless_dfu_pca10040_s132.emProject
+    - cd $CI_PROJECT_DIR
+    - git status
+    - git log
+    - git log -1 --date=unix | grep "Date:" | rev | cut -d ' ' -f 1 | rev
+    - git describe --always --abbrev=6 --dirty=-dirty
+#  services:
+#    - bug313/nrf_embuild
+  tags:
+    - nrf_embuild
+#  variables:
+#    DOCKER_TLS_CERTDIR: ""
+  only:
+    - branches
+    - tags
+    - pushes

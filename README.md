@@ -1,7 +1,5 @@
-# nRF_emBuild
+# nRF_sample_project
 
-Nordic Command Line Tools 10.3 & nrfutil
+This is the "buttonless DFU" example in SDK 15.3
 
-Segger Embedded Studio 4.22 in Docker
-
-Installation has added in PATH so "emBuild", "nrfutil", "mergehex" & "nrfjprog" are directly available for use
+Re-organized file structure & emProject file w/ $(SDK_DIR) macro
