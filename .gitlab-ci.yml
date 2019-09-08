@@ -20,13 +20,15 @@ build:
     - git log -1 --date=unix | grep "Date:" | rev | cut -d ' ' -f 1 | rev
     - git describe --always --abbrev=6 --dirty=-dirty
   artifacts:
-    name: "CI_COMMIT_SHORT_SHA"
+#    name: "$CI_COMMIT_SHORT_SHA"
+    paths: "binary"
     paths:
       - $CI_PROJECT_DIR/dfu_template/Output/Release/Exe/*.hex
     when: on_success
-  cache:
-    paths:
-      - $CI_PROJECT_DIR/dfu_template/Output
+#  cache:
+#    paths:
+# Not beneficial as intermediates in cache are always older than source
+#      - $CI_PROJECT_DIR/dfu_template/Output
 #  services:
 #    - bug313/nrf_embuild
 #  tags:
